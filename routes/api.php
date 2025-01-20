@@ -22,9 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('pay',[PaymentController::class, 'createTransaction']);
-    Route::put('order/put',[OrdersController::class, 'update']);
-    Route::apiResource('order',OrdersController::class);
+    Route::post('pay',[PaymentController::class, 'createTransaction'])->middleware(['auth:api','isverified']);
+    Route::apiResource('order',OrdersController::class)->middleware(['auth:api','isadmin']);
     Route::apiResource('category',CategoriesController::class);
     Route::apiResource('product',ProductsController::class);
     Route::apiResource('role',RolesController::class)->middleware(['auth:api','isadmin']);
