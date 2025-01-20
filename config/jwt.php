@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 10080), //token expired menjadi 10080 menit atau 7 hari
 
     /*
     |--------------------------------------------------------------------------
