@@ -23,34 +23,32 @@ class PaymentController extends Controller
 
         $user = auth()->user();
         $userData = User::findOrFail($user->id);
-        // dd($userData->id);
 
         $product = Products::findOrFail($request->input("idProduct"));
-        // dd($orderId, $product, $product->price, $request->all(), $request->quantity, $request->quantity * $product->price);
+
+        // $stok = $product->stock;
+        // $qty = $request->input("quantity");
+
+        // $totalQty = ($stok >= $qty) ? $qty : $stok;
+        // if ($totalQty >= 0){
+        //     $product->stock = $stok - $qty;
+        //     $product->save();
+        // }
+        
         // Data transaksi
         $transactionDetails = [
             'order_id' => $orderId,
             'gross_amount' => $product->price * $request->input("quantity"), // Harga total
         ];
-        // dd($transactionDetails);
 
         $itemDetails = [
             [
                 'id' => $product->id,
                 'price' => $product->price,
                 'quantity' => $request->input("quantity"),
-                'name' => '$product->name',
+                'name' => $product->name, //untuk sementara menghindari error
             ],
         ];
-
-        // dd($transactionDetails, $itemDetails);
-
-        // $customerDetails = [
-        //     'first_name' => 'John',
-        //     'last_name' => 'Doe',
-        //     'email' => 'customer@example.com',
-        //     'address' => 'lorem ipsum',
-        // ];
 
         $transaction = [
             'transaction_details' => $transactionDetails,
@@ -58,28 +56,20 @@ class PaymentController extends Controller
             // 'customer_details' => $customerDetails,
         ];
 
-        // dd($transaction);
-
-        // $orderan = Orders::findOrFail($request->input("orderId"));
-        // dd($orderan ,$request->all());
-
-
-
         try {
-
             $snapToken = Midtrans\Snap::getSnapToken($transaction);
             $order = Orders::create([
                 'order_id' => $orderId,
-                'first_name' => "fname",
-                'last_name' => "lname",
-                'address' => "adddress",
+                'first_name' => $request->input("first_name"),
+                'last_name' => $request->input("last_name"),
+                'address' => $request->input("address"),
                 'total_price' => $transactionDetails['gross_amount'],
                 'quantity' => $request->input("quantity"),
                 'status' => 'pending',
                 'product_id' => $product->id,
                 'user_id' => $userData->id,
             ]);
-            // return dd($snapToken);
+            
             return response()->json(['snap_token' => $snapToken, 'order' => $order]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
