@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('pay',[PaymentController::class, 'createTransaction'])->middleware(['auth:api','isverified']);
-    Route::apiResource('order',OrdersController::class)->middleware(['auth:api','isadmin']);
-    Route::apiResource('category',CategoriesController::class);
-    Route::apiResource('product',ProductsController::class);
-    Route::apiResource('role',RolesController::class)->middleware(['auth:api','isadmin']);
+    Route::post('pay', [PaymentController::class, 'createTransaction'])->middleware(['auth:api', 'isverified']);
+    Route::apiResource('order', OrdersController::class)->middleware(['auth:api', 'isverified']);
+    Route::apiResource('category', CategoriesController::class);
+    Route::apiResource('product', ProductsController::class);
+    Route::apiResource('role', RolesController::class)->middleware(['auth:api', 'isadmin']);
 
     //auth
     Route::prefix('auth')->group(function () {
@@ -37,6 +37,6 @@ Route::prefix('v1')->group(function () {
         Route::post('verifikasi-akun', [AuthController::class, 'verifikasi'])->middleware('auth:api');
         Route::post('generate-otp-code', [AuthController::class, 'generateOtp'])->middleware('auth:api');
     })->middleware('api');
-    
-    Route::post('profile', [ProfilesController::class, 'storeupdate'])->middleware(['auth:api','isverified']);
-   });
+
+    Route::post('profile', [ProfilesController::class, 'storeupdate'])->middleware(['auth:api', 'isverified']);
+});
