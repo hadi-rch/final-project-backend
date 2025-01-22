@@ -14,7 +14,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $category = Categories::get();
-        
+
         return response()->json([
             "message" => "Berhasil Tampil Kategori",
             "data" => $category
@@ -30,7 +30,7 @@ class CategoriesController extends Controller
             'name' => 'required|min:2,max:255',
         ],[
             'required' => 'The :attribute field is required ',
-            'min' => 'inputan :attribute :min karakter' 
+            'min' => 'inputan :attribute :min karakter'
         ]);
 
         Categories::create([
@@ -64,10 +64,10 @@ class CategoriesController extends Controller
             'name' => 'required|min:2,max:255',
         ],[
             'required' => 'The :attribute field is required ',
-            'min' => 'inputan :attribute :min karakter' 
+            'min' => 'inputan :attribute :min karakter'
         ]);
         $category = Categories::find($id);
-        
+
         if(!$category){
             return response([
                 "message" => "Data dengan $id tidak ditemukan",
@@ -75,7 +75,7 @@ class CategoriesController extends Controller
         }
 
         $category->name = $request->input('name');
-        
+
         $category->save();
 
         return response([
