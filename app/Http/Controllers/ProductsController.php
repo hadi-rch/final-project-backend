@@ -11,14 +11,28 @@ class ProductsController extends Controller
     {
         $this->middleware(['auth:api', 'isadmin'])->except(['index','show']);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $product = Products::get();
+        // $product = Products::get();
+
+
+        $query = Products::query();
+        if($request->has("search")){
+            $searching = $request->input("search");
+            $query->where('name', "LIKE", "%$searching");
+        };
+
+        $perpage = $request->input('per_page', 10);
+
+        $product = $query->paginate($perpage);
 
         return response([
             "message" => "tampil data berhasil",
             "data" => $product
         ],200);
+
+
+
     }
 
     public function store(Request $request)
@@ -32,18 +46,18 @@ class ProductsController extends Controller
             'category_id' => 'required|exists:categories,id',
         ],[
             'required' => 'The :attribute harus diisi tidak boleh kosong ',
-            'min' => 'inputan :attribute :min karakter', 
+            'min' => 'inputan :attribute :min karakter',
             'max' => 'inputan :attribute :max karakter',
             'mimes' => 'inputan :attribute harus berformat jpeg,png,jpg,gif',
             'image' => 'inputan :attribute harus gambar',
             'exist' => 'inputan :attribute tidak ditemukan di table genres',
-            'integer' => 'inputan harus berupa angka' 
+            'integer' => 'inputan harus berupa angka'
         ]);
 
         $uploadedFileUrl = cloudinary()->upload($request->file('image')->getRealPath(), [
             'folder' => 'final',
         ])->getSecurePath();
-        
+
         $product = new Products;
 
         $product->name = $request->input('name');
@@ -54,7 +68,7 @@ class ProductsController extends Controller
         $product->category_id = $request->input('category_id');
 
         $product->save();
-        
+
         return response()->json([
             "message" => "Data berhasil ditambahkan",
         ], 201);
@@ -92,23 +106,23 @@ class ProductsController extends Controller
             'category_id' => 'required|exists:categories,id',
         ],[
             'required' => ':attribute harus diisi tidak boleh kosong ',
-            'min' => 'inputan :attribute :min karakter', 
+            'min' => 'inputan :attribute :min karakter',
             'max' => 'inputan :attribute :max karakter',
             'mimes' => 'inputan :attribute harus berformat jpeg,png,jpg,gif',
             'image' => 'inputan :attribute harus gambar',
             'exist' => 'inputan :attribute tidak ditemukan di table genres',
-            'integer' => 'inputan harus berupa angka' 
+            'integer' => 'inputan harus berupa angka'
         ]);
 
         $product = Products::find($id);
-        
+
         if($request->hasFile('image')){
             $uploadedFileUrl = cloudinary()->upload($request->file('image')->getRealPath(), [
                 'folder' => 'final',
             ])->getSecurePath();
             $product->image = $uploadedFileUrl;
         }
-        
+
         if(!$product){
             return response([
                 "message" => "Data dengan $id tidak ditemukan",
