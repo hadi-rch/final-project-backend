@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('order_id')->unique();
+            $table->string('order_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->text('address');
-            $table->integer('total_price');
+            $table->bigInteger('total_price');
             $table->integer('quantity');
             $table->enum('status', ['PENDING', 'SUCCESS', 'CANCEL']);
 
