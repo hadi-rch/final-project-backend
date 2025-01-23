@@ -9,7 +9,7 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api', 'isadmin'])->except(['index','show']);
+        $this->middleware(['auth:api', 'isadmin'])->except(['index','show','getProduct']);
     }
     public function index(Request $request)
     {
@@ -30,10 +30,18 @@ class ProductsController extends Controller
             "message" => "tampil data berhasil",
             "data" => $product
         ],200);
-
-
-
     }
+
+    public function getProduct()
+    {
+        $product = Products::get();
+
+        return response()->json([
+            "message" => "Berhasil Tampil Product",
+            "data" => $product
+        ],200);
+    }
+
 
     public function store(Request $request)
     {
