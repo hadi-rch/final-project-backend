@@ -14,48 +14,48 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\Categories::factory(10)->create();
-        $categories = [
-            'Electronics',
-            'Fashion',
-            'Home & Garden',
-            'Sports',
-            'Health & Beauty',
-            'Toys & Hobbies',
-            'Automotive',
-            'Books',
-            'Music',
-            'Movies',
-            'Groceries',
-            'Pet Supplies',
-            'Office Supplies',
-            'Tools & Hardware',
-            'Jewelry',
-            'Watches',
-            'Baby Products',
-            'Video Games',
-            'Software',
-            'Art & Collectibles',
-            'Crafts',
-            'Industrial',
-            'Musical Instruments',
-            'Cameras & Photo',
-            'Cell Phones & Accessories'
-        ];
+        // $categories = [
+        //     'Electronics',
+        //     'Fashion',
+        //     'Home & Garden',
+        //     'Sports',
+        //     'Health & Beauty',
+        //     'Toys & Hobbies',
+        //     'Automotive',
+        //     'Books',
+        //     'Music',
+        //     'Movies',
+        //     'Groceries',
+        //     'Pet Supplies',
+        //     'Office Supplies',
+        //     'Tools & Hardware',
+        //     'Jewelry',
+        //     'Watches',
+        //     'Baby Products',
+        //     'Video Games',
+        //     'Software',
+        //     'Art & Collectibles',
+        //     'Crafts',
+        //     'Industrial',
+        //     'Musical Instruments',
+        //     'Cameras & Photo',
+        //     'Cell Phones & Accessories'
+        // ];
 
-        $categoryData = [];
+        // $categoryData = [];
 
-        foreach ($categories as $category) {
-            $categoryData[] = [
-                'id' => Str::uuid(),
-                'name' => $category,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
+        // foreach ($categories as $category) {
+        //     $categoryData[] = [
+        //         'id' => Str::uuid(),
+        //         'name' => $category,
+        //         'created_at' => now(),
+        //         'updated_at' => now(),
+        //     ];
+        // }
 
-        Categories::insert($categoryData);
+        // Categories::insert($categoryData);
 
-        \App\Models\Products::factory(100)->create();
+        // \App\Models\Products::factory(100)->create();
 
 
 

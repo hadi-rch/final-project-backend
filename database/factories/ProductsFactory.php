@@ -20,15 +20,15 @@ class ProductsFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->name();
+        // $title = fake()->name();
 
-        return [
-            'name' => $title,
-            'price' => fake()->numberBetween(),
-            'description' => fake()->sentence(),
-            'image' => "https://placehold.co/600x400?text=$title",
-            'stock' => fake()->randomDigit(),
-            'category_id' => Categories::inRandomOrder()->pluck('id')->first(),
-        ];
+        // return [
+        //     'name' => $title,
+        //     'price' => fake()->numberBetween(),
+        //     'description' => fake()->sentence(),
+        //     'image' => "https://placehold.co/600x400?text=$title",
+        //     'stock' => fake()->randomDigit(),
+        //     'category_id' => Categories::inRandomOrder()->pluck('id')->first(),
+        // ];
     }
 }
