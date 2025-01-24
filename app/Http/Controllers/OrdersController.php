@@ -18,6 +18,15 @@ class OrdersController extends Controller
             "data" => $order
         ], 200);
     }
+    public function show(string $id)
+    {
+        $order = Orders::with('user_order')->find($id);
+
+        return response()->json([
+            "message" => "Berhasil Tampil order",
+            "data" => $order
+        ], 200);
+    }
     public function destroy(string $id)
     {
         $idOrders = Orders::find($id);
