@@ -19,8 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    // 'allowed_origins' => ['https://final-project-frontend-hwv5oky06-hadirchs-projects.vercel.app/'],
-    'allowed_origins' => ['http://localhost:5173'],
+    'allowed_origins' => ['https://final-project-frontend-hwv5oky06-hadirchs-projects.vercel.app/'],
+    // 'allowed_origins' => ['http://localhost:5173'],
 
     'allowed_origins_patterns' => [],
 

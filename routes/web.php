@@ -20,8 +20,8 @@ use Illuminate\Http\Request;
 
 Route::options('{any}', function (Request $request) {
     return response()->json([], 204, [
-        'Access-Control-Allow-Origin' => 'http://localhost:5173',
-        // 'Access-Control-Allow-Origin' => 'https://final-project-frontend-hwv5oky06-hadirchs-projects.vercel.app/',
+        // 'Access-Control-Allow-Origin' => 'http://localhost:5173',
+        'Access-Control-Allow-Origin' => 'https://final-project-frontend-hwv5oky06-hadirchs-projects.vercel.app/',
         'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers' => 'Content-Type, Authorization',
     ]);
